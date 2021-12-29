@@ -5,7 +5,7 @@ import Router from 'express-promise-router';
 import httpErrors from 'http-errors';
 import { v4 as uuidv4 } from 'uuid';
 
-import { convertSound } from '../../converters/convert_sound';
+import { convertSound, generateSoundMeta } from '../../converters/convert_sound';
 import { UPLOAD_PATH } from '../../paths';
 import { extractMetadataFromSound } from '../../utils/extract_metadata_from_sound';
 
@@ -30,6 +30,10 @@ router.post('/sounds', async (req, res) => {
     // 音声の拡張子を指定する
     extension: EXTENSION,
   });
+
+  const meta = await generateSoundMeta(converted.buffer);
+  const metaFilePath = path.resolve(UPLOAD_PATH, `./sounds/meta/${soundId}.${EXTENSION}.json`);
+  fs.writeFile(metaFilePath, JSON.stringify(meta));
 
   const filePath = path.resolve(UPLOAD_PATH, `./sounds/${soundId}.${EXTENSION}`);
   await fs.writeFile(filePath, converted);
