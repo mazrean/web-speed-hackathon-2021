@@ -41,11 +41,17 @@ wsh2021.mazrean.com {
     header /terms Link "</fonts/webfont.css>; rel=preload; as=style"
   }
 
-  handle /scripts/* /styles/* {
+  @route-dist {
+    path /scripts/* /styles/*
+  }
+  handle @route-dist {
     try_files dist{path}
   }
 
-  handle /fonts/* /images/* /movies/* /sounds/* /svgs/* /robots.txt {
+  @route-public {
+    path /fonts/* /images/* /movies/* /sounds/* /svgs/* /robots.txt
+  }
+  handle @route-public {
     try_files public{path}
   }
 
