@@ -2,7 +2,7 @@
 
 FROM node:16.13.1-alpine3.12 AS build
 
-WORKDIR /app/
+WORKDIR /app
 
 COPY ./package.json ./yarn.lock ./
 COPY ./client/package.json ./client/
@@ -17,9 +17,9 @@ RUN yarn build
 
 FROM caddy:2.4.6-alpine
 
-COPY --from=build /app/dist /usr/share/caddy/dist
 COPY ./public /usr/share/caddy/public
 COPY ./deploy/Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /app/dist /usr/share/caddy/dist
 
 ENTRYPOINT ["caddy"]
 CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
