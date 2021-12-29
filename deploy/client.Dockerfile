@@ -4,10 +4,6 @@ FROM node:16.13.1-alpine3.12 AS build
 
 WORKDIR /app/
 
-RUN --mount=type=cache,target=/usr/src/app/.npm \
-  npm set cache /usr/src/app/.npm && \
-  npm install -g yarn
-
 COPY ./package.json ./yarn.lock ./
 COPY ./client/package.json ./client/
 COPY ./server/package.json ./server/
