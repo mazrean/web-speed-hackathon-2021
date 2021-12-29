@@ -1,4 +1,3 @@
-import moment from 'moment';
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -49,6 +48,8 @@ const TimelineItem = ({ post }) => {
     [post, navigate],
   );
 
+  const createdAt = new Date(post.createdAt);
+
   return (
     <article className="px-1 hover:bg-gray-50 sm:px-4" onClick={handleClick}>
       <div className="flex pb-4 pt-2 px-2 border-b border-gray-300 sm:px-4">
@@ -70,8 +71,8 @@ const TimelineItem = ({ post }) => {
             </Link>
             <span className="pr-1 text-gray-500">-</span>
             <Link className="pr-1 text-gray-500 hover:underline" to={`/posts/${post.id}`}>
-              <time dateTime={moment(post.createdAt).toISOString()}>
-                {moment(post.createdAt).locale('ja').format('LL')}
+              <time dateTime={createdAt.toISOString()}>
+                {`${createdAt.getFullYear()}年${createdAt.getMonth() + 1}月${createdAt.getDate()}日`}
               </time>
             </Link>
           </p>
