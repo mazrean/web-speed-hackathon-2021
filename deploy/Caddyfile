@@ -1,6 +1,5 @@
 {
   servers :443 {
-    allow_h2c
     experimental_http3
   }
 }
