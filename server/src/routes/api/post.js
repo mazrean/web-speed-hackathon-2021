@@ -5,13 +5,15 @@ import { Comment, Post } from '../../models';
 
 const router = Router();
 
-router.get('/posts', async (req, res) => {
-  const posts = await Post.findAll({
-    limit: req.query.limit,
-    offset: req.query.offset,
-  });
+let posts = [];
+(async () => {
+  posts = await Post.findAll();
+})();
 
-  return res.status(200).type('application/json').send(posts);
+router.get('/posts', async (req, res) => {
+  const postList = posts.slice(req.query.offset, req.query.offset + req.query.limit);
+
+  return res.status(200).type('application/json').send(postList);
 });
 
 router.get('/posts/:postId', async (req, res) => {
@@ -57,6 +59,8 @@ router.post('/posts', async (req, res) => {
       ],
     },
   );
+
+  posts = [post, ...posts];
 
   return res.status(200).type('application/json').send(post);
 });
