@@ -12,7 +12,7 @@ RUN --mount=type=cache,target=/usr/src/app/.yarn \
   yarn install --frozen-lockfile && \
   rm -rf /app/server
 
-COPY ./client ./
+COPY ./client ./client
 RUN yarn build
 
 FROM caddy:2.4.6-alpine
