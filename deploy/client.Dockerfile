@@ -23,7 +23,7 @@ FROM caddy:2.4.6-alpine
 
 COPY --from=build /app/dist /usr/share/caddy/dist
 COPY ./public /usr/share/caddy/public
-COPY ./docker/Caddyfile /etc/caddy/Caddyfile
+COPY ./deploy/Caddyfile /etc/caddy/Caddyfile
 
 ENTRYPOINT ["caddy"]
 CMD ["run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
