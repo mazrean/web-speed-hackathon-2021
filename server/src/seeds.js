@@ -8,6 +8,7 @@ import sounds from '../seeds/sounds.json';
 import users from '../seeds/users.json';
 
 import { Comment, Image, Movie, Post, PostsImagesRelation, ProfileImage, Sound, User } from './models';
+import { getPostList } from './routes/api/post';
 
 async function insertSeeds() {
   await ProfileImage.bulkCreate(profileImages, { logging: false });
@@ -18,6 +19,8 @@ async function insertSeeds() {
   await Post.bulkCreate(posts, { logging: false });
   await PostsImagesRelation.bulkCreate(postsImagesRelation, { logging: false });
   await Comment.bulkCreate(comments, { logging: false });
+
+  await getPostList();
 }
 
 export { insertSeeds };

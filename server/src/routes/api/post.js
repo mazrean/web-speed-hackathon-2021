@@ -4,16 +4,16 @@ import httpErrors from 'http-errors';
 import { Comment, Post } from '../../models';
 
 const router = Router();
+let postList = [];
 
-let posts = [];
-(async () => {
-  posts = await Post.findAll();
-})();
+async function getPostList() {
+  postList = await Post.findAll();
+}
 
 router.get('/posts', async (req, res) => {
-  const postList = posts.slice(req.query.offset, req.query.offset + req.query.limit);
+  const posts = postList.slice(req.query.offset, req.query.offset + req.query.limit);
 
-  return res.status(200).type('application/json').send(postList);
+  return res.status(200).type('application/json').send(posts);
 });
 
 router.get('/posts/:postId', async (req, res) => {
@@ -60,9 +60,9 @@ router.post('/posts', async (req, res) => {
     },
   );
 
-  posts = [post, ...posts];
+  postList = [await Post.findByPk(post.id), ...postList];
 
   return res.status(200).type('application/json').send(post);
 });
 
-export { router as postRouter };
+export { router as postRouter, getPostList };
