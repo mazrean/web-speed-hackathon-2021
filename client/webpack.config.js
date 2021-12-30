@@ -51,8 +51,9 @@ const config = {
     ],
   },
   output: {
-    filename: 'scripts/[name].js',
+    filename: 'scripts/[name]-[contenthash:8].js',
     path: DIST_PATH,
+    publicPath: '/',
   },
   plugins: [
     new webpack.ProvidePlugin({
@@ -65,7 +66,7 @@ const config = {
       NODE_ENV: 'production',
     }),
     new MiniCssExtractPlugin({
-      filename: 'styles/[name].css',
+      filename: 'styles/[name]-[contenthash:8].css',
     }),
     new HtmlWebpackPlugin({
       inject: true,
