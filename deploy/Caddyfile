@@ -45,12 +45,12 @@ wsh2021.mazrean.com {
     path /scripts/* /styles/*
   }
   handle @route-dist {
-    header @immutable Cache-Control "public, max-age=604800, immutable"
+    header Cache-Control "public, max-age=604800, immutable"
     try_files dist{path}
   }
 
   @route-public {
-    header @immutable Cache-Control "public, max-age=604800, immutable"
+    header Cache-Control "public, max-age=604800, immutable"
     path /fonts/* /images/* /movies/* /sounds/* /svgs/* /robots.txt
   }
   handle @route-public {
