@@ -16,7 +16,7 @@ const AspectRatioBox = ({ aspectHeight, aspectWidth, children }) => {
   const ref = React.useRef(null);
 
   return (
-    <div ref={ref} className="relative w-full" style={{ aspectRatio: `${aspectWidth/aspectHeight}` }}>
+    <div ref={ref} className="relative w-full" style={{ aspectRatio: `${aspectWidth} / ${aspectHeight}` }}>
       {children}
     </div>
   );
