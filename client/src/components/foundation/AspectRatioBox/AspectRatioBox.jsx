@@ -16,8 +16,8 @@ const AspectRatioBox = ({ aspectHeight, aspectWidth, children }) => {
   const ref = React.useRef(null);
 
   return (
-    <div ref={ref} className="relative w-full h-1" style={{ paddingBottom: `${100*aspectHeight/aspectWidth}%` }}>
-      <div className="absolute inset-0">{children}</div>
+    <div ref={ref} className="relative w-full" style={{ aspectRatio: `${aspectWidth/aspectHeight}` }}>
+      {children}
     </div>
   );
 };
