@@ -27,7 +27,7 @@ import { ffmpeg } from './ffmpeg';
 
       const data = await fs.readFile(fp)
       ffmpeg.FS('writeFile', 'file', new Uint8Array(data))
-      await ffmpeg.run('-i', 'file', '-movflags', 'faststart', '-t', '5', '-r', '10', '-c', 'vp9', '-b:v', '0', '-crf', '41', '-vf', `crop=${cropOptions}`, '-an', name);
+      await ffmpeg.run('-i', 'file', '-movflags', 'faststart', '-pix_fmt', 'yuv420p', '-row-mt', `crop=${cropOptions}`, '-an', name);
       const exported = ffmpeg.FS('readFile', name)
       await fs.writeFile(filePath, exported, 'binary')
     }
