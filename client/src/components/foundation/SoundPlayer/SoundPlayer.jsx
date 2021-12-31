@@ -1,5 +1,4 @@
 import React from 'react';
-import { faPlay, faPause } from '@fortawesome/free-solid-svg-icons'
 
 import { useFetch } from '../../../hooks/use_fetch';
 import { fetchJSON } from '../../../utils/fetchers';
@@ -53,7 +52,7 @@ const SoundPlayer = ({ sound }) => {
           onClick={handleTogglePlaying}
           type="button"
         >
-          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+          <FontAwesomeIcon iconType={isPlaying ? 'pause' : 'play'} styleType="solid" />
         </button>
       </div>
       <div className="flex flex-col flex-grow flex-shrink pt-2 min-w-0 h-full">

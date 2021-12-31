@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import React from 'react';
-import { faPause, faPlay } from '@fortawesome/free-solid-svg-icons';
 
 import { AspectRatioBox } from '../AspectRatioBox';
 import { FontAwesomeIcon } from '../FontAwesomeIcon';
@@ -43,7 +42,7 @@ const PausableMovie = ({ src }) => {
             },
           )}
         >
-          <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
+          <FontAwesomeIcon iconType={isPlaying ? 'pause' : 'play'} styleType="solid" />
         </div>
       </button>
     </AspectRatioBox>
