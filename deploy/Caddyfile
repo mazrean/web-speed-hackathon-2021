@@ -50,7 +50,7 @@ wsh2021.mazrean.com {
   }
 
   @route-public {
-    path /fonts/* /images/* /movies/* /sounds/* /svgs/* /robots.txt
+    path /fonts/* /images/* /movies/* /sounds/* /robots.txt
   }
   handle @route-public {
     header Cache-Control "public, max-age=604800, immutable"
