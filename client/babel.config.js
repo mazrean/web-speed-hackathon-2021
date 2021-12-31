@@ -3,8 +3,10 @@ module.exports = {
     [
       '@babel/preset-env',
       {
-        corejs: '3',
-        useBuiltIns: 'usage',
+        modules: 'commonjs',
+        "targets": {
+          "esmodules": true
+        }
       },
     ],
     [
