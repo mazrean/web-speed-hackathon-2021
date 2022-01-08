@@ -10,6 +10,33 @@ on:
 env:
   IMAGE_NAME: web-speed-hackathon-2021
 jobs:
+  client-dist:
+    name: Build Client Dist
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2
+      - name: setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.11.1
+          cache: yarn
+      - name: yarn install
+        run: yarn install --frozen-lockfile
+      - name: run build
+        run: yarn build
+      - uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: ./dist
+      - name: Archive dist/
+        run: tar -zcvf ./dist.tar.gz ./dist
+      - name: Create Release and upload dist.tar.gz
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          files: dist.tar.gz
   client-image:
     name: Build Client Image
     runs-on: ubuntu-latest
